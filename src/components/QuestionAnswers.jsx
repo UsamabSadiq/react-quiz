@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion }) => {
 
     // Merged Array of Answers
+    fileData[currentQuestion]?.incorrect_answers.push(fileData[currentQuestion]?.correct_answer)
     // console.log(fileData[currentQuestion]?.incorrect_answers); // returning merged array of incorrect and correct answers
 
     // next question
@@ -39,7 +40,7 @@ const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion }) => {
                     <div className="answers py-2 flex flex-col justify-center gap-4  w-full my-4">
 
                         {
-                            fileData[currentQuestion]?.incorrect_answers?.map((item, index) => {
+                            fileData[currentQuestion]?.incorrect_answers?.length < 5 && fileData[currentQuestion]?.incorrect_answers?.map((item, index) => {
 
                                 return (
                                     <button key={index} className='border border-gray-300 shadow-lg px-3 py-1 rounded-md hover:bg-red-700 duration-300 text-base font-medium '>
