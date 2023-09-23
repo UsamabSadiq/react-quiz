@@ -4,6 +4,7 @@ import BottomProgressBar from './BottomProgressBar';
 const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion, loading }) => {
     const [marks, setMarks] = useState(0)
     const [selectedAnswer, setSelectedAnswer] = useState("")
+    const [allAnswer, setAllAnswer] = useState([])
     const [wrongAnswer, setWrongAnswer] = useState(false)
 
     // console.log(wrongAnswer);
@@ -24,8 +25,13 @@ const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion, loadin
         if (selectedAnswer) {
             if (decodeURIComponent(selectedAnswer) === decodeURIComponent(fileData[currentQuestion]?.correct_answer)) {
                 setMarks(marks + 1)
+                setAllAnswer([...allAnswer, selectedAnswer])
+                setSelectedAnswer("")
             } else if (decodeURIComponent(selectedAnswer) !== decodeURIComponent(fileData[currentQuestion]?.correct_answer)) {
                 setWrongAnswer(true)
+                setAllAnswer([...allAnswer, selectedAnswer])
+                setSelectedAnswer("")
+
                 alert('wrong Answer')
             }
             return
@@ -33,7 +39,9 @@ const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion, loadin
 
     }
     // console.log("marks => ", marks);
-
+    useEffect(() => {
+        console.log('Updated quizAnswers:', allAnswer);
+    }, [allAnswer]);
     // Previous question function
     const previousQuestion = () => {
         if (!currentQuestion < 1) {
@@ -44,8 +52,6 @@ const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion, loadin
 
     return (
         <>
-
-
             {
                 loading ? <div className='flex justify-center items-center gap-x-3'>
                     <div
@@ -75,7 +81,7 @@ const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion, loadin
                                         fileData[currentQuestion]?.incorrect_answers?.map((item, index) => {
 
                                             return (
-                                                <button key={index} onClick={() => setSelectedAnswer(item)} className='border border-gray-400 shadow-lg px-3 py-1 rounded-md hover:bg-gray-300 duration-300 text-base font-medium focus:outline-none focus:bg-green-300 focus:ring focus:ring-violet-300'>
+                                                <button key={index} onClick={() => setSelectedAnswer(decodeURIComponent(item))} className='border border-gray-400 shadow-lg px-3 py-1 rounded-md hover:bg-gray-300 duration-300 text-base font-medium focus:outline-none focus:bg-green-300 focus:ring focus:ring-violet-300'>
                                                     {decodeURIComponent(item)}
                                                 </button>
                                             )
@@ -103,7 +109,7 @@ const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion, loadin
 
                         </div>
 
-                        <BottomProgressBar />
+                        <BottomProgressBar fileData={fileData} marks={marks} currentQuestion={currentQuestion} setCurrentQuestion={setCurrentQuestion} />
                     </>
             }
 
