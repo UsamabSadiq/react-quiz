@@ -3,7 +3,7 @@ import { BsStarFill } from "react-icons/bs";
 
 const StarDifficulty = ({ difficulty }) => {
 
-    console.log(difficulty);
+    // console.log(difficulty);
     let starIcon = []
 
     let star = 0
