@@ -1,7 +1,20 @@
 import React, { useEffect, useState } from 'react'
 // import { FaXmark } from "react-icons/fa6";
-const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion }) => {
+const QuestionAnswers = ({ fileData, setFileData, currentQuestion, setCurrentQuestion }) => {
+    // useEffect(() => {
+    //     const currentQuestionData = fileData[currentQuestion]
+    //     console.log(currentQuestionData);
+    //     // Check if the correct_answer is not already in incorrect_answers
+    //     if (currentQuestion > 0 && currentQuestion < fileData.length) {
+    //         [currentQuestion]?.incorrect_answers.push(currentQuestionData.correct_answer);
+    //         console.log(updatedData[currentQuestion]?.incorrect_answers);
+    //         setFileData(updatedData);
 
+    //         console.log(fileData);
+    //     }
+    // }, []);
+
+    console.log('modifiedData =>', fileData);
     // next question
     const nextQuestion = () => {
         if (currentQuestion < fileData.length - 1) {
@@ -45,9 +58,9 @@ const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion }) => {
                                 )
                             })
                         }
-                        <button className='border border-gray-300 shadow-lg px-3 py-1 rounded-md hover:bg-red-700 duration-300 text-base font-medium '>
+                        {/* <button className='border border-gray-300 shadow-lg px-3 py-1 rounded-md hover:bg-red-700 duration-300 text-base font-medium '>
                             {decodeURIComponent(fileData[currentQuestion]?.correct_answer)}
-                        </button>
+                        </button> */}
                     </div>
                 </div>
             </div>
