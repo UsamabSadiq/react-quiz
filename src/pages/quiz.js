@@ -22,7 +22,7 @@ const Quiz = () => {
                 incorrect_answers: [...item.incorrect_answers, item.correct_answer],
             }));
 
-            console.log(modifiedData);
+            // console.log(modifiedData);
             // console.log('apiData =>', data);
             setFileData(modifiedData)
 

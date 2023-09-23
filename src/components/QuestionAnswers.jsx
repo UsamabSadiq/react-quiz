@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { FaXmark } from "react-icons/fa6";
 const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion }) => {
     const [marks, setMarks] = useState(0)
-    const [selectedAnswer, setSelectedAnswer] = useState(0)
+    const [selectedAnswer, setSelectedAnswer] = useState("")
     const [wrongAnswer, setWrongAnswer] = useState(false)
-    console.log(selectedAnswer);
-    console.log('modifiedData =>', fileData);
+    console.log(wrongAnswer);
+    // console.log(decodeURIComponent(selectedAnswer));
+    // console.log('modifiedData =>', fileData);
     // next question
     const nextQuestion = () => {
         updateMarks()
@@ -17,13 +18,16 @@ const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion }) => {
     }
 
     const updateMarks = () => {
-        if (selectedAnswer === decodeURIComponent(fileData[currentQuestion]?.correct_answer)) {
-            alert('Correct Answer')
+        if (decodeURIComponent(selectedAnswer) === decodeURIComponent(fileData[currentQuestion]?.correct_answer)) {
             setMarks(marks + 1)
-        } else {
+        } else if (decodeURIComponent(selectedAnswer) !== decodeURIComponent(fileData[currentQuestion]?.correct_answer)) {
             setWrongAnswer(true)
+            alert('wrong Answer')
+
         }
     }
+    console.log("marks => ", marks);
+
 
     const previousQuestion = () => {
         if (!currentQuestion < 1) {
@@ -52,7 +56,7 @@ const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion }) => {
                             fileData[currentQuestion]?.incorrect_answers?.map((item, index) => {
 
                                 return (
-                                    <button key={index} onClick={() => setSelectedAnswer(index + 1)} className='border border-gray-300 shadow-lg px-3 py-1 rounded-md hover:bg-red-700 duration-300 text-base font-medium focus:outline-none focus:ring focus:ring-violet-300'>
+                                    <button key={index} onClick={() => setSelectedAnswer(item)} className='border border-gray-300 shadow-lg px-3 py-1 rounded-md hover:bg-red-700 duration-300 text-base font-medium focus:outline-none focus:ring focus:ring-violet-300'>
                                         {decodeURIComponent(item)}
                                     </button>
                                 )
@@ -65,10 +69,7 @@ const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion }) => {
             {/* Answer Response */}
 
             <div className="heading-nextbtn text-center flex justify-between flex-wrap gap-y-3 mx-auto translate-y-20 md:translate-y-10 lg:translate-y-0">
-                <div className={`gap-x-3 items-center hidden ${wrongAnswer ? 'flex' : ""} `}>
-                    <h2 className="wrongAnswer cursor-pointer capitalize bg-red-500 text-xl text-white font-normal  px-4 py-1 rounded-lg" >Soorry Wrong Answer</h2>
-                    <FaXmark size={20} />
-                </div>
+
 
                 <button onClick={previousQuestion} className="next-btn border border-purple-500 bg-purple-400  px-5 py-1 rounded-md hover:bg-purple-700 duration-300 text-lg font-medium text-white w-full md:w-auto">
                     Back
@@ -81,6 +82,9 @@ const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion }) => {
 
             </div>
 
+            <div className={`gap-x-3 items-center my-4 justify-center flex  `}>
+                <h2 className={`wrongAnswer cursor-pointer capitalize border-2 border-gray-400 text-xl font-normal  px-5 py-1 rounded-lg`} >Marks: {marks}</h2>
+            </div>
 
         </>
     )
