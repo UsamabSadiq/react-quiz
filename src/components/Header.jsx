@@ -3,7 +3,7 @@ import StarDifficulty from "./StarDifficulty";
 import { Link } from "react-router-dom";
 
 const Header = ({ fileData, currentQuestion }) => {
-    const [totalTimeInSeconds, setTotalTimeInSeconds] = useState(900); // 15 minutes * 60 seconds
+    const [totalTimeInSeconds, setTotalTimeInSeconds] = useState(900);
     const [remainingMinutes, setRemainingMinutes] = useState(15);
     const [remainingSeconds, setRemainingSeconds] = useState(0);
 

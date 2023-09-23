@@ -33,12 +33,12 @@ const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion, loadin
             }
             return
         }
-
     }
     // console.log("marks => ", marks);
     useEffect(() => {
         // console.log('AllAnswersArrays:', allAnswer);
     }, [allAnswer]);
+
     // Previous question function
     const previousQuestion = () => {
         if (!currentQuestion < 1) {
@@ -51,6 +51,7 @@ const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion, loadin
         <>
             {
                 loading ? <div className='flex justify-center items-center gap-x-3'>
+                    {/* Loading  */}
                     <div
                         className="inline-block h-6 w-6 animate-spin rounded-full border-4 border-solid border-purple-400 border-r-transparent align-[-0.125em] text-primary motion-reduce:animate-[spin_1.5s_linear_infinite]"
                         role="status">
@@ -72,8 +73,8 @@ const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion, loadin
                                     </span>
                                 </div>
 
+                                {/* Map Answers  */}
                                 <div className="answers py-2 flex flex-col justify-center gap-4  w-full my-4">
-
                                     {
                                         fileData[currentQuestion]?.incorrect_answers?.map((item, index) => {
 
@@ -88,7 +89,7 @@ const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion, loadin
                             </div>
                         </div>
 
-
+                        {/* Next, Back, Marks Counter */}
                         <div className="heading-nextbtn text-center flex justify-between flex-wrap gap-y-3 mx-auto my-5 md:my-10 ">
 
                             <button onClick={previousQuestion} className="next-btn border order-last md:order-none border-purple-500 bg-purple-400  px-5 py-1 rounded-md hover:bg-purple-700 duration-300 text-lg font-medium text-white w-full md:w-auto">

@@ -24,7 +24,6 @@ const Quiz = () => {
             }));
 
             // console.log(modifiedData);
-            // console.log('apiData =>', data);
             setFileData(modifiedData)
             setLoading(false)
 

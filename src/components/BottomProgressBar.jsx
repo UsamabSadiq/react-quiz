@@ -1,12 +1,6 @@
 import React from "react";
 
-const BottomProgressBar = ({
-    fileData,
-    currentQuestion,
-    setCurrentQuestion,
-    allAnswer,
-    marks,
-}) => {
+const BottomProgressBar = ({ fileData, allAnswer, marks }) => {
     const colors = [
         {
             color: 'purple',
@@ -25,17 +19,11 @@ const BottomProgressBar = ({
             text: 'correct '
         }]
 
-    //         totalQuestion
-    // attemptedPercentage
-    // correctPercentage
-    // remainingPercentage
-
     //Calculate the progress percentages
     const totalQuestions = fileData.length * 5
     const attemptedQuestions = allAnswer.length * 5
     const correctQuestions = marks * 5
     const remainingQuestions = totalQuestions - attemptedQuestions
-
 
     return (
         <>
