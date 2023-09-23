@@ -16,17 +16,11 @@ const Quiz = () => {
             const res = await fetch('questionsData.json')
             const data = await res.json()
 
-
-            // Fetch your data here (e.g., using fetch or any data fetching method)
-            // For this example, we assume you've already fetched and stored it in fetchedData.
-
             // Modify the data to push correct_answer into incorrect_answers
             const modifiedData = data.map((item) => ({
                 ...item,
                 incorrect_answers: [...item.incorrect_answers, item.correct_answer],
             }));
-
-            // setQuizData(modifiedData);
 
             console.log(modifiedData);
             // console.log('apiData =>', data);
