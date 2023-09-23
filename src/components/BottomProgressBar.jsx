@@ -62,7 +62,7 @@ const BottomProgressBar = ({
 
 
             {/*  color representation */}
-            < div className="main border flex flex-wrap gap-3 justify-between md:justify-center mb-10 translate-y-10" >
+            < div className="main flex flex-wrap gap-3 justify-between md:justify-center mb-10 translate-y-10" >
                 {
                     colors.map((color, index) => {
                         return (

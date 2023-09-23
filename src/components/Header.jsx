@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import StarDifficulty from "./StarDifficulty";
+import { Link } from "react-router-dom";
 
 const Header = ({ fileData, currentQuestion }) => {
     const [totalTimeInSeconds, setTotalTimeInSeconds] = useState(900); // 15 minutes * 60 seconds
@@ -26,9 +27,13 @@ const Header = ({ fileData, currentQuestion }) => {
     }, [totalTimeInSeconds]);
     return (
         <>
-            <h1 className="mainHeading text-center text-4xl font-semibold uppercase underline text-slate-400 mb-3">
-                quiz App test
-            </h1>
+            <div className="flex justify-center">
+                <Link to={'/'} className="mainHeading text-center text-4xl font-semibold uppercase underline text-slate-400 mb-3">
+                    quiz App
+                </Link >
+
+            </div>
+
             <div className="header ">
                 <h2 className="qestionNum text-3xl font-semibold my-2">
                     Question
@@ -51,8 +56,11 @@ const Header = ({ fileData, currentQuestion }) => {
 
             {/* Timer */}
 
-            <div className="right">
-                Time Remaining: {remainingMinutes} minutes {remainingSeconds} seconds
+            <div className="flex justify-center ">
+                <p className="border-2  font-semibold text-lg w-fit px-3 py-1 rounded-lg">
+                    Remaining Time: {remainingMinutes} Min {remainingSeconds} Sec
+
+                </p>
             </div>
         </>
     );
