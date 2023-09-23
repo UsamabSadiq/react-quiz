@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { FaXmark } from "react-icons/fa6";
 import BottomProgressBar from './BottomProgressBar';
 const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion, loading }) => {
     const [marks, setMarks] = useState(0)
@@ -7,10 +6,7 @@ const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion, loadin
     const [allAnswer, setAllAnswer] = useState([])
     const [wrongAnswer, setWrongAnswer] = useState(false)
 
-    // console.log(wrongAnswer);
-    // console.log(decodeURIComponent(selectedAnswer));
-    // console.log('modifiedData =>', fileData);
-
+    console.log(wrongAnswer);
     // next question function
     const nextQuestion = () => {
         updateMarks()
@@ -27,6 +23,7 @@ const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion, loadin
                 setMarks(marks + 1)
                 setAllAnswer([...allAnswer, selectedAnswer])
                 setSelectedAnswer("")
+
             } else if (decodeURIComponent(selectedAnswer) !== decodeURIComponent(fileData[currentQuestion]?.correct_answer)) {
                 setWrongAnswer(true)
                 setAllAnswer([...allAnswer, selectedAnswer])
@@ -40,7 +37,7 @@ const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion, loadin
     }
     // console.log("marks => ", marks);
     useEffect(() => {
-        console.log('Updated quizAnswers:', allAnswer);
+        // console.log('AllAnswersArrays:', allAnswer);
     }, [allAnswer]);
     // Previous question function
     const previousQuestion = () => {
@@ -63,7 +60,7 @@ const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion, loadin
                 </div> :
 
                     <>
-                        <div className="main min-h-[45vh] flex items-baseline  md:items-center mt-5" >
+                        <div className="main min-h-[45vh] flex items-baseline  md:items-center mt-3" >
 
                             <div className="content-box rounded-md px-3 border border-gray-200 shadow-xl pb-4 mx-auto">
 
@@ -81,7 +78,7 @@ const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion, loadin
                                         fileData[currentQuestion]?.incorrect_answers?.map((item, index) => {
 
                                             return (
-                                                <button key={index} onClick={() => setSelectedAnswer(decodeURIComponent(item))} className='border border-gray-400 shadow-lg px-3 py-1 rounded-md hover:bg-gray-300 duration-300 text-base font-medium focus:outline-none focus:bg-green-300 focus:ring focus:ring-violet-300'>
+                                                <button key={index} onClick={() => setSelectedAnswer(decodeURIComponent(item))} className='border border-gray-400 shadow-lg px-3 py-1 rounded-md hover:bg-gray-300 duration-300 text-base font-medium focus:outline-none focus:bg-green-300 focus:ring'>
                                                     {decodeURIComponent(item)}
                                                 </button>
                                             )
@@ -109,7 +106,7 @@ const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion, loadin
 
                         </div>
 
-                        <BottomProgressBar fileData={fileData} marks={marks} currentQuestion={currentQuestion} setCurrentQuestion={setCurrentQuestion} />
+                        <BottomProgressBar fileData={fileData} marks={marks} currentQuestion={currentQuestion} setCurrentQuestion={setCurrentQuestion} allAnswer={allAnswer} />
                     </>
             }
 
