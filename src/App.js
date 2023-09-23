@@ -1,13 +1,21 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
-import Header from './components/Header';
-import QuestionAnswers from './components/QuestionAnswers';
+import Quiz from './pages/quiz';
+import Home from './pages/home';
 
 function App() {
   return (
-    <div className='max-w-[1400px] mx-auto p-3'>
-      <Header />
-      <QuestionAnswers />
-    </div>
+    <>
+      <BrowserRouter>
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/quiz" element={<Quiz />} />
+        </Routes>
+      </BrowserRouter>
+
+
+    </>
   );
 }
 
