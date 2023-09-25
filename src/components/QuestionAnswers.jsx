@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import BottomProgressBar from './BottomProgressBar';
-const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion, loading }) => {
-    const [marks, setMarks] = useState(0)
+
+const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion, loading, setShowScoreCard, marks, setMarks }) => {
+    // const [marks, setMarks] = useState(0)
     const [selectedAnswer, setSelectedAnswer] = useState("")
-    const [allAnswer, setAllAnswer] = useState([])
     const [wrongAnswer, setWrongAnswer] = useState(false)
+    const [disableBtn, SetDisableBtn] = useState(false)
+    const [allAnswer, setAllAnswer] = useState([])
 
     console.log(wrongAnswer);
     // next question function
@@ -34,10 +36,6 @@ const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion, loadin
             return
         }
     }
-    // console.log("marks => ", marks);
-    useEffect(() => {
-        // console.log('AllAnswersArrays:', allAnswer);
-    }, [allAnswer]);
 
     // Previous question function
     const previousQuestion = () => {
@@ -46,6 +44,15 @@ const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion, loadin
         }
         else { }
     }
+
+    // For Disabling Next Button
+    useEffect(() => {
+        if (allAnswer.length === 20) {
+            alert('You Answer all questions successfull')
+            SetDisableBtn(true)
+        } else { }
+    }, [allAnswer.length])
+
 
     return (
         <>
@@ -99,13 +106,21 @@ const QuestionAnswers = ({ fileData, currentQuestion, setCurrentQuestion, loadin
                             <div className={`gap-x-3 flex  items-center justify-center  `}>
                                 <h2 className={`wrongAnswer cursor-pointer capitalize border-2 border-gray-400 text-xl font-medium  px-5 py-1 rounded-lg`} >Marks: {marks}</h2>
                             </div>
-                            <button onClick={nextQuestion} className="next-btn border border-purple-500 bg-purple-400  px-5 py-1 rounded-md hover:bg-purple-700 duration-300 text-lg font-medium text-white w-full md:w-auto">
-                                Next
-                            </button>
+                            {
 
+                                !disableBtn ? <button onClick={nextQuestion} className={`next-btn border border-purple-500 bg-purple-400  px-5 py-1 rounded-md hover:bg-purple-700 duration-300 text-lg font-medium text-white w-full md:w-auto`}>
+                                    Next
+                                </button> :
+
+                                    <button onClick={() => setShowScoreCard(true)} className={`next-btn border border-purple-500 bg-purple-400  px-5 py-1 rounded-md hover:bg-purple-700 duration-300 text-lg font-medium text-white w-full md:w-auto`}>
+                                        Done
+                                    </button>
+
+                            }
                         </div>
 
                         <BottomProgressBar fileData={fileData} marks={marks} currentQuestion={currentQuestion} setCurrentQuestion={setCurrentQuestion} allAnswer={allAnswer} />
+
                     </>
             }
 

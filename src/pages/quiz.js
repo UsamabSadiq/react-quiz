@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import QuestionAnswers from '../components/QuestionAnswers'
+import Score from '../components/Score'
 
 const Quiz = () => {
     const [loading, setLoading] = useState(true)
     const [fileData, setFileData] = useState([])
     const [currentQuestion, setCurrentQuestion] = useState(0)
+    const [showScoreCard, setShowScoreCard] = useState(false)
+    const [marks, setMarks] = useState(0)
+
 
     useEffect(() => {
         fetchData()
@@ -36,8 +40,16 @@ const Quiz = () => {
     return (
         <>
             <div className='max-w-[1400px] mx-auto p-3'>
-                <Header fileData={fileData} currentQuestion={currentQuestion} setCurrentQuestion={setCurrentQuestion} />
-                <QuestionAnswers loading={loading} fileData={fileData} setFileData={setFileData} currentQuestion={currentQuestion} setCurrentQuestion={setCurrentQuestion} />
+                {!showScoreCard ?
+                    <>
+
+                        <Header fileData={fileData} currentQuestion={currentQuestion} setCurrentQuestion={setCurrentQuestion} />
+                        <QuestionAnswers loading={loading} fileData={fileData} setFileData={setFileData} currentQuestion={currentQuestion} setCurrentQuestion={setCurrentQuestion} showScoreCard={showScoreCard} setShowScoreCard={setShowScoreCard} marks={marks} setMarks={setMarks} />
+                    </> :
+
+                    <Score marks={marks} fileData={fileData} />
+
+                }
             </div>
         </>
     )
